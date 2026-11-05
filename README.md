@@ -20,3 +20,26 @@ A fully functional, command-line Automated Teller Machine (ATM) simulation appli
    python deva.atm.py
    ```
 4. Enter the default PIN `1234` to explore the ATM system!
+
+
+
+## 📊 System Architecture Overview
+
+```mermaid
+flowchart TD
+    User[User] -->|Enters PIN and selects action| CLI[CLI User Input]
+    CLI --> PIN{PIN Verification}
+    PIN -->|Invalid PIN| Attempt[PIN attempt < 3]
+    Attempt -->|Yes| CLI
+    Attempt -->|No| Block[Block Session]
+    PIN -->|PIN verified| Menu[Transaction Menu]
+    
+    Menu --> Deposit[Deposit Method]
+    Menu --> Withdraw[Withdrawal Method]
+    Menu --> History[Transaction History]
+    Menu --> Exit[Exit]
+    
+    Deposit --> Update[Update balance and record]
+    Withdraw --> Update
+    Update --> History
+```
